@@ -1,0 +1,49 @@
+# LLM 配置
+llm:
+  provider: "openai"
+  model: "gpt-3.5-turbo"
+  temperature: 0.3
+  max_tokens: 2000
+
+# 多 Agent 配置
+multi_agent:
+  mode: "supervisor"  # supervisor / workflow / autogen
+  max_rounds: 10
+  verbose: true
+
+# Agent 角色定义
+agents:
+  researcher:
+    name: "研究员"
+    role: "负责信息检索和资料整理"
+    tools: ["search", "wikipedia"]
+  writer:
+    name: "写手"
+    role: "负责内容撰写和文案生成"
+    tools: []
+  reviewer:
+    name: "审核员"
+    role: "负责内容审核和质量把控"
+    tools: []
+  coder:
+    name: "程序员"
+    role: "负责代码编写和调试"
+    tools: ["code_executor"]
+
+# 工作流配置
+workflow:
+  type: "sequential"  # sequential / parallel / conditional
+  steps:
+    - researcher
+    - writer
+    - reviewer
+
+# MCP 配置
+mcp:
+  enabled: false
+  servers: []
+
+# 服务配置
+server:
+  host: "0.0.0.0"
+  port: 8002
